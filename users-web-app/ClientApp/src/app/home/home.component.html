@@ -1,0 +1,32 @@
+<h1>Users</h1>
+
+<div id="table-container">
+  <a class="btn btn-light btn-add text-capitalize float" *ngIf="users">
+    <i class="fa fa-plus my-float" aria-hidden="true"></i>
+  </a>
+  <table class="table table-striped" *ngIf="users">
+    <thead class="bg-primary text-white text-uppercase">
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Date of Birth</th>
+        <th colspan="2">Age</th>
+      </tr>
+    </thead>
+    <tbody class="table-hover">
+      <tr *ngFor="let i of users">
+        <td>{{ i.name }}</td>
+        <td>{{ i.surname }}</td>
+        <td>{{ i.dateOfBirth.substring(0, 10) }}</td>
+        <td>{{ getAge(i.dateOfBirth) }}</td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!users" class="w-100 text-center">
+    <p><i>No users available, please add some</i></p>
+    <button type="button" class="btn btn-outline-secondary border-0" style="display: block; margin: 0 auto; font-size: 2rem" (click)="addUser()">ADD USER</button>
+  </div>
+</div>
+

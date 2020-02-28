@@ -1,0 +1,79 @@
+ANSWERS
+    Part 1
+        1) D - Circle
+        2) A - Yes
+        3) D - Unmarried, with atleast one son
+        4) E - 75
+        5) D - 18
+    
+    Part 2
+        Postgsesql 10.0.0
+
+
+        CREATE TABLE Category (
+            CategoryID VARCHAR(1),
+            Description VARCHAR(50),
+            PRIMARY KEY (CategoryID)
+           
+        );
+
+        /*
+            one to many: Category has many StockItem
+        */
+
+        CREATE TABLE Stock (
+            StockItem int NOT NULL,
+            Price int NOT NULL,
+          	CategoryID VARCHAR(2) NOT NULL,
+            PRIMARY KEY (StockItem),
+            FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID) ON DELETE CASCADE
+        );
+
+        /*
+            insert data: Category
+        */
+        INSERT into Category(CategoryID, Description)
+        VALUES('A', 'FOOD');
+
+        INSERT into Category(CategoryID, Description)
+        VALUES('B', 'HARDWARE');
+
+        /*
+            insert data: Stock
+        */
+        INSERT into Stock(StockItem, CategoryID, Price)
+        VALUES(1, 'A', 4);
+
+        INSERT into Stock(StockItem, CategoryID, Price)
+        VALUES(2, 'A', 8);
+
+        INSERT into Stock(StockItem, CategoryID, Price)
+        VALUES(3, 'B', 2);
+
+        /*
+            show records from Category table 
+        */
+        SELECT * FROM Category;
+
+        /*
+            show records from Stock table 
+        */
+        SELECT * FROM Stock;
+
+        /*
+            show records averagePrice per Category as well as Description 
+        */
+        SELECT
+            Stock.CategoryID,
+            Category.Description AS Description,
+            to_char(
+                AVG (Price),
+            '999999999999'
+            ) AS AveragePrice
+        FROM 
+            Stock
+        INNER JOIN Category ON Category.CategoryID = Stock.CategoryID  
+        GROUP BY
+            Stock.CategoryID,
+            Category.Description
+        

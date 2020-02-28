@@ -1,0 +1,30 @@
+<h1>Add Users</h1>
+
+<form [formGroup]="userForm">
+  <div class="form-label-group pt-3">
+    <label>Name</label>
+    <input formControlName="name" type="text" class="form-control" placeholder="" required autofocus>
+    <label class="text-danger" *ngIf="userForm.controls.name.errors?.required && userForm.controls.name.touched">
+      Name is Required!
+    </label>
+  </div>
+
+  <div class="form-label-group pt-3">
+    <label>Surname</label>
+    <input formControlName="surname" type="text" class="form-control" placeholder="" required>
+    <label class="text-danger" *ngIf="userForm.controls.surname.errors?.required && userForm.controls.surname.touched">
+      Surname is Required!
+    </label>
+  </div>
+
+  <div class="form-label-group pt-3">
+    <label>Date of Birth</label>
+    <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="" required>
+    <label class="text-danger" *ngIf="userForm.controls.dateOfBirth.errors?.required && userForm.controls.dateOfBirth.touched">
+      Name is Required!
+    </label>
+  </div>
+  <div class="text-center pt-5">
+    <button class="btn  btn-secondary btn-outline-primary text-uppercase" type="submit" (click)="saveUser();">Submit</button>
+  </div>
+</form>
